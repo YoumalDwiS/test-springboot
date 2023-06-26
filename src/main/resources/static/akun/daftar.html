@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/header :: header}">
+</head>
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <div th:replace="~{/layout/header :: topbar}">
+
+    </div>
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div th:replace="~{/layout/header :: navbar}">
+
+    </div>
+    <!-- Left Sidebar End -->
+
+
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a th:href="@{../home}">Beranda</a></li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Kelola Akun</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5>Daftar Akun</h5>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#tambah-modal" onclick="modalclick()">
+                                            <i class="fe-plus"></i>Tambah Akun
+                                        </button>
+                                    </div><!-- end col-->
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div th:if="${type == 'gagal'}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                    <div th:text="${msg}"></div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+
+                                <div th:if="${type == 'berhasil'}" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                    <div th:text="${msg}"></div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+
+
+                                <div id="tambah-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <form action="/api/akun/tambah" method="GET">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">~Form Tambah Akun</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="tambah_nim" class="form-label">NIK/NIM<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="tambah_nim" id="tambah_nim" placeholder="NIK/NIM" required="true" onkeypress="return isNumberKey(event)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="tambah_email" class="form-label">Email<span style="color: red">*</span></label>
+                                                                <input type="email" class="form-control" name="tambah_email" id="tambah_email" placeholder="Email" required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+<!--                                                                <label for="tambah_password" class="form-label">Password</label>-->
+<!--                                                                <input type="password" class="form-control" name="tambah_password" id="tambah_password" placeholder="Password" required="true">-->
+
+                                                                <label for="tambah_password" class="form-label">Password<span style="color: red">*</span></label>
+                                                                <div class="input-group input-group-merge">
+                                                                    <input type="password" class="form-control" name="tambah_password" id="tambah_password" placeholder="Password" required="true">
+                                                                    <div class="input-group-text" data-password="false">
+                                                                        <span class="password-eye"></span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="tambah_nama" class="form-label">Nama Lengkap<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="tambah_nama" id="tambah_nama" placeholder="Nama Lengkap" required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="tambah_role" class="form-label">Role<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="tambah_role" id="tambah_role" placeholder="Role" required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="tambah_no" class="form-label">No HP<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="tambah_no" id="tambah_no" placeholder="No HP" required="true" onkeypress="return isNumberKey(event)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Simpan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <form action="/api/akun/edit" method="GET">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title">~Form Edit Akun</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <input type="hidden" name="edit_id" id="edit_id">
+                                                                <label for="edit_nim" class="form-label">NIK/NIM<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="edit_nim" id="edit_nim" placeholder="NIK/NIM" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="edit_email" class="form-label">Email<span style="color: red">*</span></label>
+                                                                <input type="email" class="form-control" name="edit_email" id="edit_email" placeholder="Email" required="true">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="edit_password" class="form-label">Password<span style="color: red">*</span></label>
+                                                                <div class="input-group input-group-merge">
+                                                                    <input type="password" class="form-control" name="edit_password" id="edit_password" placeholder="Password">
+                                                                    <div class="input-group-text" data-password="false">
+                                                                        <span class="password-eye"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="edit_nama" class="form-label">Nama Lengkap<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="edit_nama" id="edit_nama" placeholder="Nama Lengkap" required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="edit_role" class="form-label">Role<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="edit_role" id="edit_role" placeholder="Role" required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="edit_no" class="form-label">No HP<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="edit_no" id="edit_no" placeholder="No HP" required="true" onkeypress="return isNumberKey(event)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Edit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="akses-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <form action="/api/akses/akses" method="GET">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">~Form Hak Akses User</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <input type="hidden" name="akses_id" id="akses_id">
+                                                                <label for="akses_nim" class="form-label">NIK/NIM<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="akses_nim" id="akses_nim" placeholder="NIK/NIM" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="akses_nama" class="form-label">Nama Lengkap<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="akses_nama" id="akses_nama" placeholder="Nama Lengkap" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="akses_email" class="form-label">Email<span style="color: red">*</span></label>
+                                                                <input type="email" class="form-control" name="akses_email" id="akses_email" placeholder="Email" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="akses_no" class="form-label">No NO<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="akses_no" id="akses_no" placeholder="No HP" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Hak Akses<span style="color: red">*</span></label>
+                                                                <div class="form-check form-switch">
+                                                                    <input type="checkbox" class="form-check-input" value="1" name="akses1" id="akses1">
+                                                                    <label class="form-check-label" for="akses1">User</label>
+                                                                </div>
+                                                                <br/>
+                                                                <div class="form-check form-switch">
+                                                                    <input type="checkbox" class="form-check-input" value="2" name="akses2" id="akses2">
+                                                                    <label class="form-check-label" for="akses2">Mekanik</label>
+                                                                </div>
+                                                                <br/>
+                                                                <div class="form-check form-switch">
+                                                                    <input type="checkbox" class="form-check-input" value="3" name="akses3" id="akses3">
+                                                                    <label class="form-check-label" for="akses3">Service Advisor</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Simpan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <form action="/api/akun/hapus" method="POST">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Yakin Hapus User?</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <input type="hidden" name="id_akun" id="id_akun">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tidak</button>
+                                                    <button type="submit" class="btn btn-success waves-effect waves-light">Yakin Hapus !</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- /.modal -->
+
+
+
+                                <table id="basic-datatable" class="table dt-responsive nowrap w-100 datatable">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NIM</th>
+                                        <th>Nama</th>
+                                        <th>Email</th>
+                                        <th>No HP</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr th:each="list:${list}">
+                                        <td th:text="${listStat.index + 1}"></td>
+                                        <td align="right" th:text="${list.nim}"></td>
+                                        <td th:text="${list.nama}"></td>
+                                        <td th:text="${list.email}"></td>
+                                        <td th:text="${list.no_hp}"></td>
+                                        <td>
+<!--                                            <button type="button" class="btn btn-soft-blue" data-bs-toggle="modal" data-bs-target="#akses-modal" onclick="akses(this.value)" th:value="${list.id_akun}" data-toggle="tooltip" data-placement="top" title="Akses">-->
+<!--                                                <i class="fa fa-users"></i>-->
+<!--                                            </button>-->
+                                            <button type="button" class="btn btn-soft-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="sendvalue(this.value)" th:value="${list.id_akun}" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="fa fa-pen-square"></i>
+                                            </button>
+
+                                            <button type="button" class="btn btn-soft-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="sendvaluedelete(this.value)" th:value="${list.id_akun}" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                </div>
+                <!-- end row-->
+
+
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <script>document.write(new Date().getFullYear())</script> &copy; A-tech Otocare By <a href="">Kelompok 6</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<footer th:replace="~{/layout/header :: footer}">
+
+</footer>
+
+<script>
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function sendvalue(value){
+        $.ajax({
+            url: "http://localhost:8080/api/akun/data?id="+value,
+            method: "GET",
+            success: function(data) {
+                document.getElementById("edit_id").value = data["id_akun"];
+                document.getElementById("edit_role").value = data["role"];
+                document.getElementById("edit_nim").value = data["nim"];
+                document.getElementById("edit_email").value = data["email"];
+                document.getElementById("edit_password").value = data["password"];
+                document.getElementById("edit_nama").value = data["nama"];
+                document.getElementById("edit_no").value = data["no_hp"];
+            },
+            error: function(xhr, thrownError) {
+                alert(xhr.status + xhr.responseText + thrownError);
+            }
+        });
+    }
+    function akses(value){
+        document.getElementById("akses1").checked = false;
+        document.getElementById("akses2").checked = false;
+        document.getElementById("akses3").checked = false;
+        $.ajax({
+            url: "http://localhost:8080/api/akun/data?id="+value,
+            method: "GET",
+            success: function(data) {
+                document.getElementById("akses_id").value = data["id_akun"];
+                document.getElementById("akses_role").value = data["role"];
+                document.getElementById("akses_nim").value = data["no_nim"];
+                document.getElementById("akses_email").value = data["email"];
+                document.getElementById("akses_nama").value = data["nama"];
+                document.getElementById("akses_hp").value = data["no_hp"];
+            },
+            error: function(xhr, thrownError) {
+                alert(xhr.status + xhr.responseText + thrownError);
+            }
+        });
+        $.ajax({
+            url: "http://localhost:8080/api/akses/data?id="+value,
+            method: "GET",
+            success: function(data) {
+                if(data[0]["status"] == "Aktif"){
+                    document.getElementById("akses1").checked = true;
+                }
+
+                if(data[1]["status"] == "Aktif"){
+                    document.getElementById("akses2").checked = true;
+                }
+
+                if(data[2]["status"] == "Aktif"){
+                    document.getElementById("akses3").checked = true;
+                }
+            },
+            error: function(xhr, thrownError) {
+                alert(xhr.status + xhr.responseText + thrownError);
+            }
+        });
+    }
+
+    function sendvaluedelete(value){
+        $.ajax({
+            url: "http://localhost:8080/api/akun/data?id="+value,
+            method: "GET",
+            success: function(data) {
+                document.getElementById("id_akun").value = data["id_akun"];
+            },
+            error: function(xhr, thrownError) {
+                alert(xhr.status + xhr.responseText + thrownError);
+            }
+        });
+    }
+
+    function modalclick(){
+        document.getElementById("tambah_password").value = generatePassword();
+    }
+
+    function rolegene(){
+        document.getElementById("tambah_role").value = inputRole();
+    }
+
+    var inputRole = document.getElementById("tambah_role");
+
+    // Mengubah nilai nomor telepon
+    inputRole.value = "Pengajar";
+
+    var generatePassword = (
+        length = 20,
+        wishlist = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    ) =>
+        Array.from(crypto.getRandomValues(new Uint32Array(length)))
+            .map((x) => wishlist[x % wishlist.length])
+            .join('');
+
+</script>
+
+</body>
+</html>

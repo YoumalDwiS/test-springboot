@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/header :: header}">
+</head>
+<body class="loading authentication-bg authentication-bg-pattern">
+
+<div class="account-pages mt-5 mb-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-4">
+                <div class="card bg-pattern mt-5">
+
+                    <div class="card-body p-4">
+
+                        <div class="text-center w-75 m-auto">
+                            <div class="auth-logo">
+                                <a href="#" class="logo logo-dark text-center">
+<!--                                            <span class="logo-lg">-->
+<!--                                                <img src="../assets/images/logo-dark.png" alt="" height="22">-->
+<!--                                            </span>-->
+                                </a>
+
+                                <a href="#" class="logo logo-light text-center">
+<!--                                            <span class="logo-lg">-->
+<!--                                                <img src="../assets/images/logo-light.png" alt="" height="22">-->
+<!--                                            </span>-->
+                                </a>
+                            </div>
+                            <p class="text-muted mb-4 mt-3">Masukkan NIK dan Password anda!</p>
+
+                        </div>
+
+                        <div th:if="${type == 'gagal'}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                            <div th:text="${msg}"></div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <form th:action="@{/aksilogin}" th:object="${akun}" method="post">
+
+                            <div class="mb-3">
+                                <label for="nim" class="form-label">NIK/NIM</label>
+                                <input class="form-control" type="text" id="nim" th:field="*{nim}" required="" placeholder="Masukkan NIK/NIM">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Kata sandi</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="password" class="form-control" th:field="*{password}" placeholder="Masukkan katasandi">
+                                    <div class="input-group-text" data-password="false">
+                                        <span class="password-eye"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center d-grid">
+                                <button class="btn btn-blue" type="submit"> Masuk </button>
+                            </div>
+
+                        </form>
+
+<!--                        <div class="mt-2 text-center d-grid">-->
+<!--                            <a href="auth-register.html" class="btn btn-white waves-effect">Buat Akun</a>-->
+<!--                        </div>-->
+                    </div> <!-- end card-body -->
+                </div>
+                <!-- end card -->
+
+                <!-- end row -->
+
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end page -->
+
+
+<footer th:replace="~{layout/header :: footer}">
+
+</footer>
+
+</body>
+</html>

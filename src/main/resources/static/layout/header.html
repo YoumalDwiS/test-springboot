@@ -1,0 +1,301 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Meister Application</title>
+
+    <!-- Main -->
+    <link rel="shortcut icon" th:href="@{../../assets/images/favicon.ico}">
+    <link rel="stylesheet" th:href="@{../../assets/css/config/default/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{../../assets/css/config/default/app.min.css}"/>
+    <link rel="stylesheet" th:href="@{../../assets/css/icons.min.css}"/>
+
+    <!-- Datatables -->
+    <link rel="stylesheet" th:href="@{../../assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css}"/>
+
+    <!-- Add on -->
+    <link rel="stylesheet" th:href="@{../../assets/libs/flatpickr/flatpickr.min.css}"/>
+    <link rel="stylesheet" th:href="@{../../assets/libs/selectize/css/selectize.bootstrap3.css}"/>
+
+</head>
+
+<div th:fragment="topbar">
+    <div class="navbar-custom">
+        <div class="container-fluid">
+            <ul class="list-unstyled topnav-menu float-end mb-0">
+
+                <li class="dropdown notification-list topbar-dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <i class="fe-bell noti-icon"></i>
+                        <span class="badge bg-danger rounded-circle noti-icon-badge">1</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+
+                        <!-- item-->
+                        <div class="dropdown-item noti-title">
+                            <h5 class="m-0">
+                            <span class="float-end">
+                                <a href="" class="text-dark">
+                                    <small>Clear All</small>
+                                </a>
+                            </span>Notification
+                            </h5>
+                        </div>
+
+                        <div class="noti-scroll" data-simplebar>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                                <div class="notify-icon">
+                                    <img src="../../assets/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                                <p class="notify-details">Cristina Pride</p>
+                                <p class="text-muted mb-0 user-msg">
+                                    <small>Hi, How are you? What about our next meeting</small>
+                                </p>
+                            </a>
+
+                        </div>
+
+                        <!-- All-->
+                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                            View all
+                            <i class="fe-arrow-right"></i>
+                        </a>
+
+                    </div>
+                </li>
+
+                <li class="dropdown notification-list topbar-dropdown">
+                    <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="../../assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                        <!--<span th:text="${user.nama}" class="pro-user-name ms-1">
+                            <i class="mdi mdi-chevron-down"></i>
+                        </span>-->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
+                        <!-- item-->
+                        <div class="dropdown-header noti-title">
+                            <h6 class="text-overflow m-0">Welcome !</h6>
+                        </div>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-user"></i>
+                            <span>My Account</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-lock"></i>
+                            <span>Lock Screen</span>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <!-- item-->
+                        <a th:href="@{../../logout}" class="dropdown-item notify-item">
+                            <i class="fe-log-out"></i>
+                            <span>Logout</span>
+                        </a>
+
+                    </div>
+                </li>
+
+            </ul>
+
+            <!-- LOGO -->
+            <div class="logo-box">
+                <a th:href="@{../../home}" class="logo logo-dark text-center">
+                <span class="logo-sm">
+                    <img src="../../assets/images/logo-sm.png" alt="" height="22">
+                    <!-- <span class="logo-lg-text-light">UBold</span> -->
+                </span>
+                    <span class="logo-lg">
+                    <img src="../../assets/images/logo-dark.png" alt="" height="20">
+                        <!-- <span class="logo-lg-text-light">U</span> -->
+                </span>
+                </a>
+
+                <a th:href="@{../../home}" class="logo logo-light text-center">
+                <span class="logo-sm">
+                    <img src="../../assets/images/logo-sm.png" alt="" height="22">
+                </span>
+                    <span class="logo-lg">
+                    <img src="../../assets/images/re-astratech.png" alt="" height="20">
+                </span>
+                </a>
+            </div>
+
+            <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                <li>
+                    <button class="button-menu-mobile waves-effect waves-light">
+                        <i class="fe-menu"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="navbar">
+    <div class="left-side-menu">
+
+        <div class="h-100" data-simplebar>
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+
+                <ul id="side-menu">
+
+                    <li class="menu-title">Kelola</li>
+
+                    <li>
+                        <a th:href="@{../../bagian/daftar}">
+                            <i class="fe-user"></i>
+                            <span> Kelola Bagian </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../akun/daftar}">
+                            <i class="fe-user"></i>
+                            <span> Kelola Akun </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../materi/daftar}">
+                            <i class="fe-disc"></i>
+                            <span> Kelola Materi </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../aspek/daftar}">
+                            <i class="fe-disc"></i>
+                            <span> Kelola Aspek </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../detailaspek/daftar}">
+                            <i class="fe-disc"></i>
+                            <span> Kelola Detail Aspek </span>
+                        </a>
+                    </li>
+
+                    <!--<li>
+                        <a th:href="@{../../merkkendaraan/daftar}">
+                            <i class="fe-stop-circle"></i>
+                            <span> Kelola Merk Kendaraan </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../variankendaraan/daftar}">
+                        <i class="fe-target"></i>
+                            <span> Kelola Varian Kendaraan </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../layanan/daftar}">
+                            <i class="fe-zap"></i>
+                            <span> Kelola Layanan </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../kategorisparepart/daftar}">
+                            <i class="fe-cpu"></i>
+                            <span> Kelola Kat. Sparepart </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../sparepart/daftar}">
+                            <i class="fe-cpu"></i>
+                            <span> Kelola Sparepart </span>
+                        </a>
+                    </li>
+
+                    <li class="menu-title">Transaksi</li>
+
+                    <li>
+                        <a th:href="@{../../transaksi/perbaikan}">
+                            <i class="fe-check-circle"></i>
+                            <span> Jasa Perbaikan </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../transaksi/perjanjian}">
+                            <i class="fe-file-text"></i>
+                            <span> Perjanjian </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../transaksi/pembayaran}">
+                            <i class="fe-dollar-sign"></i>
+                            <span> Pembayaran </span>
+                        </a>
+                    </li>
+
+                    <li class="menu-title">Notifikasi</li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fe-bell"></i>
+                            <span> Notifikasi Perbaikan </span>
+                        </a>
+                    </li>
+
+                    <li class="menu-title">Laporan</li>
+
+                    <li>
+                        <a th:href="@{../../laporan/riwayat}">
+                            <i class="fe-file-text"></i>
+                            <span> Riwayat Service </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{../../laporan/pemasukan}">
+                            <i class="fe-clipboard"></i>
+                            <span> Laporan Pemasukan </span>
+                        </a>
+                    </li>-->
+
+                </ul>
+
+            </div>
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Sidebar -left -->
+
+    </div>
+</div>
+
+<footer th:fragment="footer">
+    <!-- Main -->
+    <script th:src="@{../../assets/js/vendor.min.js}"></script>
+    <script th:src="@{../../assets/js/app.min.js}"></script>
+
+    <!-- Datatables -->
+    <script th:src="@{../../assets/js/pages/datatables.init.js}"></script>
+    <script th:src="@{../../assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{../../assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js}"></script>
+
+    <!-- Add on -->
+    <script th:src="@{../../assets/libs/flatpickr/flatpickr.min.js}"></script>
+    <script th:src="@{../../assets/libs/apexcharts/apexcharts.min.js}"></script>
+    <script th:src="@{../../assets/libs/selectize/js/standalone/selectize.min.js}"></script>
+    <script th:src="@{../../assets/js/pages/dashboard-1.init.js}"></script>
+
+</footer>

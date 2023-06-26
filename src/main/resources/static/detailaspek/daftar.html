@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/header :: header}">
+
+</head>
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <div th:replace="~{/layout/header :: topbar}">
+
+    </div>
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div th:replace="~{/layout/header :: navbar}">
+
+    </div>
+    <!-- Left Sidebar End -->
+
+
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a th:href="@{../home}">Beranda</a></li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Kelola Detail Aspek</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5>Daftar Detail Aspek</h5>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#tambah-modal">
+                                            <i class="fe-plus"></i>Tambah
+                                        </button>
+                                    </div><!-- end col-->
+                                </div>
+                            </div>
+
+
+                            <div class="card-body">
+
+                                <div th:if="${type == 'gagal'}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                    <div th:text="${msg}"></div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+
+                                <div th:if="${type == 'berhasil'}" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                    <div th:text="${msg}"></div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+
+
+                                <div id="tambah-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <form action="/api/detailaspek/tambah" method="GET">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">~Form Tambah Data Detail Aspek</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="tambah_aspek" class="form-label">Aspek<span style="color: red">*</span></label>
+                                                                <select class="form-select" name="tambah_aspek" id="tambah_aspek" required="true">
+                                                                    <option value="">Pilih Aspek</option>
+                                                                    <option th:each="listks : ${listks}" th:value="${listks.id_aspek}" th:text="${listks.nama_aspek}"></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="tambah_soal" class="form-label">Soal<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="tambah_soal" id="tambah_soal" placeholder="Soal" required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+<!--                                                    <div class="row">-->
+<!--                                                        <div class="col-md-12">-->
+<!--                                                            <div class="mb-3">-->
+<!--                                                                <label for="tambah_harga" class="form-label">Harga Sparepart<span style="color: red">*</span></label>-->
+<!--                                                                <input type="text" class="form-control" name="tambah_harga" id="tambah_harga" placeholder="Harga Sparepart" required="true" onkeypress="return isNumberKey(event)">-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Simpan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <form action="/api/detailaspek/edit" method="GET">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">~Form Edit Detail Aspek</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="edit_aspek" class="form-label">Aspek<span style="color: red">*</span></label>
+                                                                <select class="form-select" name="edit_aspek" id="edit_aspek" required="true">
+                                                                    <option value="">Pilih Aspek</option>
+                                                                    <option th:each="listks : ${listks}" th:value="${listks.id_aspek}" th:text="${listks.nama_aspek}"></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <input type="hidden" name="edit_id" id="edit_id">
+
+                                                                <label for="edit_soal" class="form-label">Soal<span style="color: red">*</span></label>
+                                                                <input type="text" class="form-control" name="edit_soal" id="edit_soal" placeholder="Soal" required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Edit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <form action="/api/detailaspek/hapus" method="POST">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Yakin Hapus Detail Aspek?</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <input type="hidden" name="id_detail_aspek" id="id_detail_aspek">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tidak</button>
+                                                    <button type="submit" class="btn btn-success waves-effect waves-light">Yakin Hapus !</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <!-- /.modal -->
+
+
+                                <table id="basic-datatable" class="table dt-responsive nowrap w-100 datatable">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Aspek </th>
+                                        <th>Soal</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr th:each="list:${list}">
+                                        <td th:text="${listStat.index + 1}"></td>
+                                        <td th:text="${list.id_aspek.nama_aspek}"></td>
+                                        <td th:text="${list.soal}"></td>
+                                        <td>
+                                            <button type="button" class="btn btn-soft-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="sendvalue(this.value)" th:value="${list.id_detail_aspek}" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="fa fa-pen-square"></i>
+                                            </button>
+
+                                            <button type="button" class="btn btn-soft-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="sendvaluedelete(this.value)" th:value="${list.id_detail_aspek}" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                </div>
+                <!-- end row-->
+
+
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <script>document.write(new Date().getFullYear())</script> &copy; Meister-App By <a href="">Kelompok 2</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+
+
+<footer th:replace="~{/layout/header :: footer}">
+
+</footer>
+
+<script>
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function sendvalue(value){
+        $.ajax({
+            url: "http://localhost:8080/api/detailaspek/data?id="+value,
+            method: "GET",
+            success: function(data) {
+                document.getElementById("edit_id").value = data["id_detail_aspek"];
+                document.getElementById("edit_aspek").value = data["id_aspek"]["id_aspek"];
+                document.getElementById("edit_soal").value = data["soal"];
+            },
+            error: function(xhr, thrownError) {
+                alert(xhr.status + xhr.responseText + thrownError);
+            }
+        });
+    }
+
+    function sendvaluedelete(value){
+        $.ajax({
+            url: "http://localhost:8080/api/detailaspek/data?id="+value,
+            method: "GET",
+            success: function(data) {
+                document.getElementById("id_detail_aspek").value = data["id_detail_aspek"];
+            },
+            error: function(xhr, thrownError) {
+                alert(xhr.status + xhr.responseText + thrownError);
+            }
+        });
+    }
+</script>
+
+<script>
+    var tanpa_rupiah = document.getElementById('tanpa_rupiah');
+    tanpa_rupiah.addEventListener('keyup', function(e)
+    {
+        tanpa_rupiah.value = formatRupiah(this.value);
+    });
+    function formatRupiah(angka, prefix)
+    {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split    = number_string.split(','),
+            sisa     = split[0].length % 3,
+            rupiah     = split[0].substr(0, sisa),
+            ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+</script>
+
+
+</body>
+</html>
